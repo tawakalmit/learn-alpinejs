@@ -5,15 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpine Js</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
-    <h1 x-data="{ message: 'I ❤️ Alpine' }" x-text="message"></h1>
+<body x-data="{
+    search: '',
 
-    <div x-data="{count: 0}">
-        <button x-on:click="count++">Tambah Kambing</button>
-        <p x-text="count"></p>
+    items: ['alicent', 'ahmad', 'viserys', 'daemon'],
+
+    get filteredItems() {
+        return this.items.filter(
+            i => i.startsWith(this.search)
+        )
+    }
+}">
+<nav>
+    <div class="nav-con">
+        <img src="asset/logo.png" alt="logo">
+        <div class="menu" x-data="{ open: false }">
+            <a @click="open = ! open">Marketplace</a> 
+            <div class="cont" x-show="open" @click.outside="open = false">
+                <a href="">Shopee</a>
+                <a href="">Tokped</a>
+            </div>
+            <a href="">Explore</a>
+            <a href="">Community</a>
+        </div>
+        <div class="menu2">
+            <div class="search" x-data="{ buka: false }"    >
+                <input x-model="search" placeholder="Search..." x-show="buka" @click.outside="buka = false">
+                <img src="asset/magnifying-glass.png" alt="logo" @click="buka = ! buka">
+            </div>
+            <img src="asset/bag.png" alt="logo">
+        </div>
     </div>
-
+</nav>
+<main>
+    <div class="barang">
+        <template x-for="item in filteredItems" :key="item">
+            <p x-text="item" class="pencarian"></p>
+        </template>
+    </div>
+</main>
 </body>
 </html>
