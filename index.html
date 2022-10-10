@@ -42,11 +42,11 @@
     </div>
 </nav>
 <main>
-    <div class="barang">
         <template x-for="item in filteredItems" :key="item">
-            <p x-text="item" class="pencarian"></p>
+            <div class="barang">
+                <p x-text="item" class="pencarian"></p>
+            </div>
         </template>
-    </div>
 </main>
 </body>
 </html>
